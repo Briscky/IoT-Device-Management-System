@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backend.mapper.DeviceMapper">
 
-    <resultMap id="ResultMap" type="com.example.backend.model.Device">
+    <resultMap id="BaseResultMap" type="com.example.backend.model.Device">
         <result column="id" javaType="int" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="description" jdbcType="VARCHAR" property="description" />
@@ -35,9 +35,15 @@
         where `name` = '${form.name}' and `userid` = '${form.userid}';
     </update>
 
-    <update id="editDeviceWithoutDescription" parameterType="map">
-        update `Device`
-        set `type` = '${form.type}'
-        where `name` = '${form.name}' and `userid` = '${form.userid}';
-    </update>
+<!--    <update id="editDeviceWithoutDescription" parameterType="map">-->
+<!--        update `Device`-->
+<!--        set `type` = '${form.type}'-->
+<!--        where `name` = '${form.name}' and `userid` = '${form.userid}';-->
+<!--    </update>-->
+
+    <select id="getActiveDeviceList" resultType="com.example.backend.model.Device">
+        select *
+        from `Device`
+        where `userid` = #{userId} and `activate_time` != '';
+    </select>
 </mapper>

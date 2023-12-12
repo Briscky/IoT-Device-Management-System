@@ -72,4 +72,24 @@ public class DeviceService {
         System.out.println(form);
         return deviceMapper.editDevice(form);
     }
+
+    /**
+     * 获取当前用户的所有设备的数目
+     * @param name 用户名
+     * @return 设备总数
+     */
+    public int getDeviceCount(String name) {
+        int id = userMapper.getUserInfo(name).getId();
+        return deviceMapper.getDeviceList(id).size();
+    }
+
+    /**
+     * 获取当前用户的所有激活设备的数目
+     * @param name 用户名
+     * @return 激活设备总数
+     */
+    public int getActiveDeviceCount(String name) {
+        int id = userMapper.getUserInfo(name).getId();
+        return deviceMapper.getActiveDeviceList(id).size();
+    }
 }

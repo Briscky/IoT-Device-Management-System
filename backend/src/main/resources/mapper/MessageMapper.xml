@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.MessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.backend.model.Message">
+        <result column="clientId" jdbcType="VARCHAR" property="clientId" />
+        <result column="info" jdbcType="VARCHAR" property="info" />
+        <result column="value" javaType="int" property="value" />
+        <result column="alert" javaType="int" property="alert" />
+        <result column="lng" javaType="double" property="lng" />
+        <result column="lat" javaType="double" property="lat" />
+        <result column="timestamp" jdbcType="VARCHAR" property="timestamp" />
+    </resultMap>
+
+    <select id="getTodayMessageList" resultType="com.example.backend.model.Message">
+        select *
+        from `Message`
+        where `clientId` = #{clientId} and date(convert(`timestamp`, date)) = curdate();
+    </select>
+
+</mapper>

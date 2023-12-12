@@ -34,4 +34,15 @@ public class DeviceController {
     public int editDevice(@RequestBody Map<String, Object> map) {
         return deviceService.editDevice(map);
     }
+
+    @RequestMapping(value = "/device/query/all/{username}", method = RequestMethod.GET)
+    public int getDeviceCount(@PathVariable String username) {
+        return deviceService.getDeviceCount(username);
+    }
+
+    @RequestMapping(value = "/device/query/list/active/{username}", method = RequestMethod.GET)
+    public int getActiveDeviceCount(@PathVariable String username) {
+        return deviceService.getActiveDeviceCount(username);
+    }
+
 }

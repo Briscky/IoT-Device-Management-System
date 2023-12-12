@@ -20,5 +20,7 @@ public interface DeviceMapper {
 
     int editDevice(@Param("form") Map<String, Object> map);
 
-    int editDeviceWithoutDescription(@Param("form") Map<String, Object> map);
+    //int editDeviceWithoutDescription(@Param("form") Map<String, Object> map);
+
+    List<Device> getActiveDeviceList(int userId);
 }
