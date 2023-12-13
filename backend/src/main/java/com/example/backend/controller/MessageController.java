@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,12 @@ public class MessageController {
     @RequestMapping(value = "/message/user/all/{username}", method = RequestMethod.GET)
     public int getTotalMessageCount(@PathVariable String username) {
         return messageService.getTotalMessageCount(username);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/message/user/week/{username}", method = RequestMethod.GET)
+    public List<Map<LocalDate, Integer>> getWeekMessageCount(@PathVariable String username) {
+        return messageService.getWeekMessageCount(username);
     }
 
 }

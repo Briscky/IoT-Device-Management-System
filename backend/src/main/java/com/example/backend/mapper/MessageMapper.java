@@ -11,4 +11,6 @@ import java.util.Map;
 @Repository
 public interface MessageMapper {
     List<Message> getTodayMessageList(String clientId);
+
+    List<Map<String, Object>> getWeekMessageCount(String clientId, String startDate, String endDate);
 }

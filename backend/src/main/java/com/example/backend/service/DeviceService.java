@@ -92,4 +92,20 @@ public class DeviceService {
         int id = userMapper.getUserInfo(name).getId();
         return deviceMapper.getActiveDeviceList(id).size();
     }
+
+    /**
+     * 获取当前用户的所有设备的类型分布
+     * @param name 用户名
+     * @return 设备类型分布
+     */
+    public List<Map<String, Object>> getDeviceTypeDistribution(String name) {
+        int id = userMapper.getUserInfo(name).getId();
+        List<Map<String, Object>> result =  deviceMapper.getDeviceTypeDistribution(id);
+        String[] types = {"基础", "车载", "健康和医疗", "家庭", "未知"};
+        for (Map<String, Object> map : result) {
+            int type = (int) map.get("kind");
+            map.put("kind", types[type - 1]);
+        }
+        return result;
+    }
 }

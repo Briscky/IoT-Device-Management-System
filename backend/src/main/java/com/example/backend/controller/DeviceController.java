@@ -45,4 +45,9 @@ public class DeviceController {
         return deviceService.getActiveDeviceCount(username);
     }
 
+    @RequestMapping(value = "/device/query/type-distribution/{username}", method = RequestMethod.GET)
+    public List<Map<String, Object>> getDeviceTypeDistribution(@PathVariable String username) {
+        return deviceService.getDeviceTypeDistribution(username);
+    }
+
 }

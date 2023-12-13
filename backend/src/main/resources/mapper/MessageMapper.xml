@@ -19,4 +19,13 @@
         where `clientId` = #{clientId} and date(convert(`timestamp`, date)) = curdate();
     </select>
 
+    <select id="getMessagesInDateRange" parameterType="map" resultType="map">
+        SELECT date(FROM_UNIXTIME(`timestamp` / 1000)) as date, COUNT(*) as messageCount
+        FROM `Message`
+        WHERE `clientId` = #{clientId}
+          AND date(FROM_UNIXTIME(`timestamp` / 1000)) BETWEEN #{startDate} AND #{endDate}
+        GROUP BY date(FROM_UNIXTIME(`timestamp` / 1000))
+    </select>
+
+
 </mapper>

@@ -46,4 +46,11 @@
         from `Device`
         where `userid` = #{userId} and `activate_time` != '';
     </select>
+
+    <select id="getDeviceTypeDistribution" resultType="map">
+        select `type` as `kind`, COUNT(all `name`) as `value`
+        from `device`
+        where `userid` = #{userId}
+        group by `type`;
+    </select>
 </mapper>
