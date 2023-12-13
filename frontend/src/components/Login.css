@@ -1,0 +1,56 @@
+.login-container {
+    display: flex;            /* 开启Flexbox布局 */
+    justify-content: center;  /* 水平居中 */
+    align-items: center;      /* 垂直居中 */
+    height: 100vh;            /* 高度设置为视口高度 */
+    width: 100vw;             /* 宽度设置为视口宽度 */
+  }
+  
+  .login-form {
+    padding: 20px;
+    width: 500px;
+    margin: 0;
+    background-color: #fff;
+    opacity:100%;
+    border: 3px solid #fff;
+    box-shadow: #fff;
+  }
+  
+  .login-form-button {
+    width: 100%; /* 让按钮宽度与输入框匹配 */
+    margin-top: 20px; /* 在按钮和表单元素之间添加一些空间 */
+  }
+  
+  /* 增加标题的样式 */
+  .login-form .ant-form-item {
+    margin-bottom: 15px;
+  }
+  
+  /* 为图标添加一些样式，如果需要 */
+  .site-form-item-icon {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  
+  /* 添加响应式布局，以适应不同屏幕大小 */
+  @media (max-width: 400px) {
+    .login-container {
+      margin: 20px auto;
+      width: auto;
+      padding: 10px;
+    }
+    
+    .login-form {
+      max-width: 100%;
+    }
+  }
+  
+  /* 为链接添加样式 */
+  .login-form a {
+    color: #1890ff;
+  }
+  
+  /* 当鼠标悬停在链接上时添加效果 */
+  .login-form a:hover {
+    text-decoration: underline;
+  }
+  
