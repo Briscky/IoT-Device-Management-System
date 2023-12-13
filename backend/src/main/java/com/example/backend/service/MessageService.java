@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -44,39 +45,78 @@ public class MessageService {
      * @param name 用户名
      * @return 每天发送的消息数，用map列表形式存储
      */
-    public List<Map<LocalDate, Integer>> getWeekMessageCount(String name) {
+    public List<Map<String, Object>> getWeekMessageCount(String name) {
+        // 获取用户ID
         int id = userMapper.getUserInfo(name).getId();
+        // 获取该用户的设备列表
         List<Device> deviceList = deviceMapper.getDeviceList(id);
 
+        // 设置查询日期范围：今天和六天前
         LocalDate today = LocalDate.now();
         LocalDate sixDaysAgo = today.minusDays(6);
 
+        // 创建一个map来存储每天的消息总数
         Map<LocalDate, Integer> dailyMessageCount = new HashMap<>();
 
+        // 初始化这个map，每一天的消息数都设置为0
         for (LocalDate date = sixDaysAgo; !date.isAfter(today); date = date.plusDays(1)) {
             dailyMessageCount.put(date, 0);
         }
 
+        // 遍历每个设备，累加每天的消息数量
         for (Device device : deviceList) {
+            // 调用mapper方法获取每个设备在指定日期范围内的消息统计
             List<Map<String, Object>> messages = messageMapper.getWeekMessageCount(device.getName(), sixDaysAgo.toString(), today.toString());
 
             for (Map<String, Object> message : messages) {
-                LocalDate date = LocalDate.parse((String) message.get("date"));
-                int count = (Integer) message.get("count");
-                dailyMessageCount.put(date, dailyMessageCount.get(date) + count);
+                if (message.get("date") != null && message.get("count") != null) {
+                    LocalDate date = ((java.sql.Date) message.get("date")).toLocalDate();
+                    int count = ((Number) message.get("count")).intValue(); // 使用Number作为中间类型以避免类转换异常
+                    dailyMessageCount.put(date, dailyMessageCount.getOrDefault(date, 0) + count);
+                }
             }
         }
 
-        // 转换为所需格式
-        List<Map<LocalDate, Integer>> result = new ArrayList<>();
+        // 转换结果为所需格式
+        List<Map<String, Object>> result = new ArrayList<>();
         for (Map.Entry<LocalDate, Integer> entry : dailyMessageCount.entrySet()) {
-            Map<LocalDate, Integer> dayCount = new HashMap<>();
-            dayCount.put(entry.getKey(), entry.getValue());
+            Map<String, Object> dayCount = new HashMap<>();
+            dayCount.put("date", entry.getKey().toString());
+            dayCount.put("count", entry.getValue());
             result.add(dayCount);
         }
 
         return result;
     }
 
+    public List<Map<String, Integer>> getDeviceValue(String deviceName) {
+        return messageMapper.getDeviceValue(deviceName);
+    }
+
+    /**
+     * 获取当天不同时间当前用户各个设备发送的value
+     * @param name 用户名
+     * @return 不同时间各设备发送的消息数，用map列表形式存储
+     */
+    public Map<String, Map<String, Integer>> getTodayMessage(String name) {
+        // 获取用户ID
+        int id = userMapper.getUserInfo(name).getId();
+        // 获取该用户的设备列表
+        List<Device> deviceList = deviceMapper.getDeviceList(id);
+        Map<String, Map<String, Integer>> result = new HashMap<>();
+
+        for (Device device : deviceList) {
+            String deviceName = device.getName();
+            List<Map<String, Integer>> msg = getDeviceValue(deviceName);
+            Map<String, Integer> map = new HashMap<>();
+            for (Map<String, Integer> m : msg) {
+                String stamp = m.get("timestamp").toString();
+                int value = m.get("value");
+                map.put(stamp, value);
+            }
+            result.put(deviceName, map);
+        }
+        return result;
+    }
 
 }

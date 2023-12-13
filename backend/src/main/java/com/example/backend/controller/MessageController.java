@@ -29,8 +29,14 @@ public class MessageController {
 
     @CrossOrigin
     @RequestMapping(value = "/message/user/week/{username}", method = RequestMethod.GET)
-    public List<Map<LocalDate, Integer>> getWeekMessageCount(@PathVariable String username) {
+    public List<Map<String, Object>> getWeekMessageCount(@PathVariable String username) {
         return messageService.getWeekMessageCount(username);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/message/query/values/today/{username}", method = RequestMethod.GET)
+    public Map<String, Map<String, Integer>> getTodayMessage(@PathVariable String username) {
+        return messageService.getTodayMessage(username);
     }
 
 }

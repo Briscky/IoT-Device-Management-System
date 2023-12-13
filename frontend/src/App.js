@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import RegisterPageWrapper from './pages/RegisterPage';
 import User from './pages/User';
 import Device from './pages/Device'; 
-// import Statistics from './pages/Statistics';
+import Statistics from './pages/Statistics';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Route path="home/config" element={<Device />} />
             {/* <Route path="home/message" element={<HomePage />} />
             <Route path="home/map" element={<HomePage />} /> */}
-            {/* <Route path="home/chart" element={<Statistics />} />  */}
+            <Route path="home/chart" element={<Statistics />} /> 
             <Route path="*" element={<HomePage />} />
           </Routes>
         </div>

@@ -7,7 +7,7 @@ import axios from "axios";
 import ChangeEmailButton from '../components/ChangeEmailButton';
 //import ChangeIntroButton from '../components/ChangeIntroButton';
 import ChangePasswordButton from '../components/ChangePasswordButton';
-import './User.css';
+import './Public.css';
 const { Content } = AntLayout;
 
 // const contentStyle = {

@@ -16,16 +16,20 @@
     <select id="getTodayMessageList" resultType="com.example.backend.model.Message">
         select *
         from `Message`
-        where `clientId` = #{clientId} and date(convert(`timestamp`, date)) = curdate();
+        where `clientId` = #{clientId} and DATE(FROM_UNIXTIME(`timestamp` / 1000)) = curdate();
     </select>
 
-    <select id="getMessagesInDateRange" parameterType="map" resultType="map">
-        SELECT date(FROM_UNIXTIME(`timestamp` / 1000)) as date, COUNT(*) as messageCount
+    <select id="getWeekMessageCount" resultType="map">
+        SELECT FROM_UNIXTIME(`timestamp` / 1000) as date, COUNT(*) as count
         FROM `Message`
         WHERE `clientId` = #{clientId}
           AND date(FROM_UNIXTIME(`timestamp` / 1000)) BETWEEN #{startDate} AND #{endDate}
         GROUP BY date(FROM_UNIXTIME(`timestamp` / 1000))
     </select>
 
-
+    <select id="getDeviceValue" resultType="map">
+        select FROM_UNIXTIME(`timestamp` / 1000) as timestamp, `value` as value
+        from `message`
+        where `clientId` = #{deviceName} and DATE(FROM_UNIXTIME(`timestamp` / 1000)) = curdate();
+    </select>
 </mapper>

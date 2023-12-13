@@ -4,7 +4,7 @@ import Layout from '../components/common';
 import AddDeviceModel from '../components/AddDeviceModal';
 import EditDeviceModal from '../components/EditDeviceModal';
 import axios from "axios";
-import './User.css';
+import './Public.css';
 const { Content } = AntLayout;
 
 const server = "http://localhost:8080";
