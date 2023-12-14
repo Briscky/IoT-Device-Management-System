@@ -33,7 +33,7 @@ const AddDeviceModal = () => {
     // 发送 POST 请求到后端创建新设备
     axios.post(`${server}/device/add`, values)
       .then(response => {
-        if(response.data == 1) {
+        if(response.data === 1) {
           message.success('设备添加成功');
         } else {
           message.error('设备添加失败');

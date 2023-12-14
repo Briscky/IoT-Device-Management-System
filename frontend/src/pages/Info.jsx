@@ -10,7 +10,8 @@ const server = 'http://localhost:8080';
 const Info = () => {
   const [loading, setLoading] = useState(true);
   const [deviceValues, setDeviceValues] = useState([]);
-  const [messageCounts, setMessageCounts] = useState([]);
+  const [deviceNames, setDeviceNames] = useState([]);
+  //const [messageCounts, setMessageCounts] = useState([]);
 
   useEffect(() => {
     const username = localStorage.getItem("name");
@@ -18,25 +19,37 @@ const Info = () => {
     // 获取当天设备值变化数据
     axios.get(`${server}/message/query/values/today/${username}`)
       .then(response => {
-        setDeviceValues(formatData(response.data));
+        // console.log('Device Values:', response.data);
+        // //const { data: deviceValues, deviceNames } = formatData(response.data);
+        // console.log('formatData:', formatData(response.data));
+        setDeviceValues(formatData(response.data).data);
+        setDeviceNames(formatData(response.data).deviceNames); 
+        setLoading(false);
       });
     
-    // 获取当天设备消息数目数据
-    axios.get(`${server}/device/query/messages/today/${username}`)
-      .then(response => {
-        setMessageCounts(response.data);
-        setLoading(false); // 数据加载完成后取消加载状态
-      });
+    // // 获取当天设备消息数目数据
+    // axios.get(`${server}/device/query/messages/today/${username}`)
+    //   .then(response => {
+    //     setMessageCounts(response.data);
+    //     setLoading(false); // 数据加载完成后取消加载状态
+    //   });
   }, []);
+
+useEffect(() => {
+  console.log('Device Values:', deviceValues);
+  console.log('Device Names:', deviceNames);
+}, [deviceValues, deviceNames]); 
 
   // 格式化数据
   function formatData(data) {
     let formattedData = [];
     let timestamps = new Set();
+    let deviceNames = new Set();
   
     // 收集所有不同的时间戳
     for (const device in data) {
       if (data.hasOwnProperty(device)) {
+        deviceNames.add(device);
         const times = Object.keys(data[device]);
         times.forEach(timestamp => timestamps.add(timestamp));
       }
@@ -49,16 +62,14 @@ const Info = () => {
     sortedTimestamps.forEach(timestamp => {
       let entry = { date: timestamp };
   
-      for (const device in data) {
-        if (data.hasOwnProperty(device)) {
-          entry[device] = data[device][timestamp] || 0; // 如果设备在该时间没有值，则设为 0
-        }
+      for (const device of deviceNames) {
+        entry[device] = data[device] && data[device][timestamp] || 0; // 如果设备在该时间没有值，则设为 0
       }
   
       formattedData.push(entry);
     });
   
-    return formattedData;
+    return { data: formattedData, deviceNames: Array.from(deviceNames) };
   }
   
   
@@ -72,12 +83,12 @@ const Info = () => {
         <div style={{ marginBottom: '20px' }}></div>
 
         <Spin spinning={loading}>
-          <Row gutter={16}>
-            <Col span={12}>
+          {/* <Row gutter={16}>
+            <Col span={12}> */}
               <div>
                 <h2>当天值变化折线图</h2>
                 <LineChart
-                  width={600}
+                  width={1200}
                   height={300}
                   data={deviceValues}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -88,7 +99,7 @@ const Info = () => {
                     <Tooltip />
                     <Legend />
                     {
-                      deviceNames.map((device, index) => (
+                      deviceNames.map(device => (
                         <Line
                             key={device}
                             type="monotone"
@@ -100,8 +111,8 @@ const Info = () => {
                   
                 </LineChart>
               </div>
-            </Col>
-            <Col span={12}>
+            {/* </Col> */}
+            {/* <Col span={12}>
               <div>
                 <h2>当天消息数目柱状图</h2>
                 <BarChart width={600} height={300} data={data}>
@@ -112,8 +123,8 @@ const Info = () => {
                     <Bar dataKey="messageCount" fill="#82ca9d" />
                 </BarChart>
               </div>
-            </Col>
-          </Row>
+            </Col> */}
+          {/* </Row> */}
         </Spin>
       </AntLayout.Content>
     </Layout>

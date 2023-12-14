@@ -6,6 +6,8 @@ import {
     PieChartOutlined,
     HomeOutlined,
     UserOutlined,
+    LineChartOutlined,
+    AreaChartOutlined
 } from '@ant-design/icons';
 import { Avatar } from 'antd';
 
@@ -19,7 +21,7 @@ class SideMenu extends React.Component {
 
     render() {
         let name = localStorage.getItem("name");
-        console.log(name);
+        //console.log(name);
 
         return (
             <Layout>
@@ -41,10 +43,10 @@ class SideMenu extends React.Component {
                     <Menu.Item key="2" icon={<DesktopOutlined />}>
                         <Link to={"/home/config"} >设备配置</Link>
                     </Menu.Item>
-                    <Menu.Item key="3" icon={<PieChartOutlined />}>
+                    <Menu.Item key="3" icon={<LineChartOutlined />}>
                         <Link to={"/home/message"} >设备数据</Link>
                     </Menu.Item>
-                    <Menu.Item key="4" icon={<PieChartOutlined />}>
+                    <Menu.Item key="4" icon={<AreaChartOutlined />}>
                         <Link to={"/home/map"} >设备信息</Link>
                     </Menu.Item>
                     <Menu.Item key="5" icon={<PieChartOutlined />}>

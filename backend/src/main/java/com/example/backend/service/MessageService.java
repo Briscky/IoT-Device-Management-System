@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 @Service
@@ -110,9 +114,15 @@ public class MessageService {
             List<Map<String, Integer>> msg = getDeviceValue(deviceName);
             Map<String, Integer> map = new HashMap<>();
             for (Map<String, Integer> m : msg) {
-                String stamp = m.get("timestamp").toString();
+                LocalDateTime timestamp;
+                Object timestampObj = m.get("timestamp");
+
+                timestamp = (LocalDateTime) timestampObj;
+                String formattedTimestamp = timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                //String formattedTimestamp = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 int value = m.get("value");
-                map.put(stamp, value);
+                map.put(formattedTimestamp, value);
+                //System.out.println(map);
             }
             result.put(deviceName, map);
         }

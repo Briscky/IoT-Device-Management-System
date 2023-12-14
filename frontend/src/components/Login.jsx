@@ -27,14 +27,14 @@ class Login extends React.Component {
         };
 
         axios.post(address, loginPayload).then(response => {
-            if (response.data.code == "1") {
+            if (response.data.code === "1") {
                 alert("登录成功！");
                 // Perform actions on success (e.g., save the token, redirect, etc.)
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('name', response.data.name);
                 this.props.navigate('/home');
             
-            } else if (response.data.code == "-1") {
+            } else if (response.data.code === "-1") {
                 // Handle failure
                 alert("用户名或邮箱不存在！" );
             } else {

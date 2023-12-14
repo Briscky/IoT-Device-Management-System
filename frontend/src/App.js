@@ -7,6 +7,7 @@ import RegisterPageWrapper from './pages/RegisterPage';
 import User from './pages/User';
 import Device from './pages/Device'; 
 import Statistics from './pages/Statistics';
+import Info from './pages/Info';
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
             <Route path="register" element={<RegisterPageWrapper />} />
             <Route path="home/user" element={<User />} />
             <Route path="home/config" element={<Device />} />
-            {/* <Route path="home/message" element={<HomePage />} />
-            <Route path="home/map" element={<HomePage />} /> */}
+            <Route path="home/message" element={<Info />} />
+            {/* <Route path="home/map" element={<HomePage />} /> */}
             <Route path="home/chart" element={<Statistics />} /> 
             <Route path="*" element={<HomePage />} />
           </Routes>

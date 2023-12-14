@@ -20,7 +20,7 @@
     </select>
 
     <select id="getWeekMessageCount" resultType="map">
-        SELECT FROM_UNIXTIME(`timestamp` / 1000) as date, COUNT(*) as count
+        SELECT date(FROM_UNIXTIME(`timestamp` / 1000)) as date, COUNT(*) as count
         FROM `Message`
         WHERE `clientId` = #{clientId}
           AND date(FROM_UNIXTIME(`timestamp` / 1000)) BETWEEN #{startDate} AND #{endDate}

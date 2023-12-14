@@ -18,15 +18,15 @@ class Register extends React.Component {
         console.log('Received values of form: ', values);
         let address = server + "/user/register"; // Update with your actual register endpoint
         axios.post(address, values).then(response => {
-            if (response.data == 1) {
+            if (response.data === 1) {
                 // You should implement authentication and redirect logic based on your backend response
                 alert("注册成功！请登录！");
                 // Redirect to home page
                 this.props.navigate('/login');
-            } else if (response.data == -1) {
+            } else if (response.data === -1) {
                 // Handle login failure
                 alert("该用户名已被注册！" );
-            } else if (response.data == -2) {
+            } else if (response.data === -2) {
                 // Handle login failure
                 alert("该邮箱已被注册！" );
             }
