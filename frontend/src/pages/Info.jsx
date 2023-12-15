@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Layout as AntLayout, Row, Col, Spin } from 'antd';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
-import axios from 'axios';
+import { Layout as AntLayout, Spin } from 'antd';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import axios from 'axios'; 
 import './Public.css';
 import Layout from '../components/common';
 
@@ -63,7 +63,7 @@ useEffect(() => {
       let entry = { date: timestamp };
   
       for (const device of deviceNames) {
-        entry[device] = data[device] && data[device][timestamp] || 0; // 如果设备在该时间没有值，则设为 0
+        entry[device] = (data[device] && data[device][timestamp]) || 0; // 如果设备在该时间没有值，则设为 0
       }
   
       formattedData.push(entry);

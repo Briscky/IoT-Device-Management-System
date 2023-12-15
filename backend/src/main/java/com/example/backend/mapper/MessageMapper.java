@@ -15,4 +15,8 @@ public interface MessageMapper {
     List<Map<String, Object>> getWeekMessageCount(String clientId, String startDate, String endDate);
 
     List<Map<String, Integer>> getDeviceValue(String deviceName);
+
+    List<Map<String, Double>> getDevicePath(String deviceName);
+
+    List<Map<String, Double>> getAlertMessage(String deviceName);
 }

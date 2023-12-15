@@ -129,4 +129,22 @@ public class MessageService {
         return result;
     }
 
+    /**
+     * 获取设备的路径
+     * @param selectedDevice 设备名
+     * @return 路径，用map列表形式存储
+     */
+    public List<Map<String, Double>> getDevicePath(String selectedDevice) {
+        return messageMapper.getDevicePath(selectedDevice);
+    }
+
+    /**
+     * 获取设备的报警信息
+     * @param selectedDevice 设备名
+     * @return 报警信息，用map列表形式存储
+     */
+    public List<Map<String, Double>> getAlertMessage(String selectedDevice) {
+        return messageMapper.getAlertMessage(selectedDevice);
+    }
+
 }

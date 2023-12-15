@@ -39,4 +39,17 @@ public class MessageController {
         return messageService.getTodayMessage(username);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/message/query/path/{selectedDevice}", method = RequestMethod.GET)
+    // 希望返回值格式：[{"lng": 120.1, "lat": 30.3}, {"lng": 120.2, "lat": 30.4}]
+    public List<Map<String, Double>> getDevicePath(@PathVariable String selectedDevice) {
+        return messageService.getDevicePath(selectedDevice);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/message/query/alert/{selectedDevice}", method = RequestMethod.GET)
+    public List<Map<String, Double>> getAlertMessage(@PathVariable String selectedDevice) {
+        return messageService.getAlertMessage(selectedDevice);
+    }
+
 }

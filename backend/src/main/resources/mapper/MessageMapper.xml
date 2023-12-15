@@ -32,4 +32,20 @@
         from `message`
         where `clientId` = #{deviceName} and DATE(FROM_UNIXTIME(`timestamp` / 1000)) = curdate();
     </select>
+
+    <select id="getDevicePath" resultType="map">
+        select `lng` as lng, `lat` as lat
+        from `message`
+        where `clientId` = #{deviceName}
+        order by `timestamp` desc
+        limit 40;
+    </select>
+
+    <select id="getAlertMessage" resultType="map">
+        select `lng` as lng, `lat` as lat
+        from `message`
+        where `clientId` = #{deviceName} and `alert` = 1
+        order by `timestamp` desc
+        limit 10;
+    </select>
 </mapper>
