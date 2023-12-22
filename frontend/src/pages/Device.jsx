@@ -7,7 +7,17 @@ import axios from "axios";
 import './Public.css';
 const { Content } = AntLayout;
 
-const server = "http://localhost:8080";
+function getBackendUrl() {
+  if (window.location.hostname === 'localhost') {
+      return 'http://127.0.0.1:8080';
+  } else {
+      // 电脑的局域网 IP 地址
+      return 'http://10.181.218.164:8080';
+  }
+}
+
+const server = getBackendUrl();
+
 
 const Device = () => {
   const [deviceData, setDeviceData] = useState([]);

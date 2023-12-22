@@ -7,7 +7,17 @@ import Layout from '../components/common';
 import './Statistics.css';
 import './Public.css';
 
-const server = 'http://localhost:8080';
+function getBackendUrl() {
+  if (window.location.hostname === 'localhost') {
+      return 'http://127.0.0.1:8080';
+  } else {
+      // 电脑的局域网 IP 地址
+      return 'http://10.181.218.164:8080';
+  }
+}
+
+const server = getBackendUrl();
+
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 

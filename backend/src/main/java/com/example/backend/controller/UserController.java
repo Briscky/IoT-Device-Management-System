@@ -15,7 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000") // 允许前端发起跨域请求
+@CrossOrigin("*")
 @RestController
 public class UserController {
     @Autowired

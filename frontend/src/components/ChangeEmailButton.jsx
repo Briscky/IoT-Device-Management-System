@@ -3,7 +3,16 @@ import { Button, Form, Input, Modal } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
-const server = "http://localhost:8080";
+function getBackendUrl() {
+    if (window.location.hostname === 'localhost') {
+        return 'http://127.0.0.1:8080';
+    } else {
+        // 电脑的局域网 IP 地址
+        return 'http://10.181.218.164:8080';
+    }
+}
+
+const server = getBackendUrl();
 
 const ChangeEmailButton = ({ setUserInfo }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
