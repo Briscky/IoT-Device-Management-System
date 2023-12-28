@@ -10,7 +10,7 @@ function getBackendUrl() {
         return 'http://127.0.0.1:8080';
     } else {
         // 电脑的局域网 IP 地址
-        return 'http://10.181.218.164:8080';
+        return 'http://10.192.202.31:8080';
     }
 }
 
@@ -107,7 +107,8 @@ class Login extends React.Component {
                 >
                 登录
                 </Button>
-                或者 <a onClick={this.goToRegister}>注册新账户!</a>
+                或者 
+                <a onClick={this.goToRegister}>注册新账户!</a>
             </Form.Item>
             </Form>
         </div>

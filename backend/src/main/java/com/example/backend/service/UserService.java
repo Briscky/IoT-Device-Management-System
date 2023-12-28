@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -84,6 +85,18 @@ public class UserService {
      * @return 1表示修改成功，否则表示修改失败
      */
     public int configPassword(Map<String, Object> form) {
-        return userMapper.configPassword(form);
+        if(Objects.equals(userMapper.checkName(form.get("name").toString()).getPassword(), form.get("newPassword").toString()))
+            return -1;
+        else
+            return userMapper.configPassword(form);
+    }
+
+    /**
+     * 通过邮箱获取用户名
+     * @param email 邮箱
+     * @return 用户名
+     */
+    public String getNameFromEmail(String email) {
+        return userMapper.checkEmail(email).getName();
     }
 }

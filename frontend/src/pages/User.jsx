@@ -23,7 +23,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.181.218.164:8080';
+      return 'http://10.192.202.31:8080';
   }
 }
 
@@ -82,7 +82,6 @@ const User = () => {
                 <br />
                 <div className="buttons-container">
                   <ChangeEmailButton setUserInfo={setUserInfo} />
-                  {/* <ChangeIntroButton setUserInfo={setUserInfo} /> //自我介绍修改还有问题，有空来修改 */}
                   <ChangePasswordButton />
                 </div>
         

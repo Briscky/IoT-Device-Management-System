@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout as AntLayout, Form, Select, Button, message } from 'antd';
+import { Form, Select, Button, message } from 'antd';
 //import { Map } from 'react-bmapgl';
 import { Map, Marker, Polyline } from 'react-amap';
 import axios from 'axios';
@@ -13,7 +13,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.181.218.164:8080';
+      return 'http://10.192.202.31:8080';
   }
 }
 
@@ -41,8 +41,7 @@ const DeviceMap = () => {
         return;
       }
       axios.get(`${server}/message/query/path/${selectedDevice}`)
-        .then(response => {
-          
+        .then(response => { 
           setPath(response.data);
       });
     
@@ -70,15 +69,7 @@ const DeviceMap = () => {
             <Button type="primary" onClick={handleSearch}>查询</Button>
           </Form.Item>
         </Form>
-         {/* <Map style={{ height: '500px' }} center={{lng: 120.1, lat: 30.3}} zoom="12">
-          {/* {path.map((item, index) => (
-            <Marker key={index} position={{lng: item.lng, lat: item.lat}} icon={index === 0 ? "start" : (index === path.length - 1 ? "end" : "loc_blue")} />
-          ))}
-           {alerts.map((alert, index) => (
-            <Label key={index} position={{lng: alert.lng, lat: alert.lat}} text="警报" />
-          ))} 
-          <Polyline path={path} strokeColor="#0000ff" /> */}
-        {/* </Map>  */ }
+
         <Map amapkey="03fd423e4a02860179d035dcd66f3ea9" center={{lng: 120.1, lat: 30.3}} zoom="12">
           {path.map((item, index) => {
             if (index === path.length - 1) {
@@ -92,13 +83,6 @@ const DeviceMap = () => {
               return <Marker key={index} position={{lng: item.lng, lat: item.lat}} />;
             }
           })}
-
-          {/* {path.map((item, index) => {
-            if (index === 0 || index === path.length - 1) {
-              // 起点
-              return <Marker key={index} position={{lng: item.lng, lat: item.lat}} />;
-            } 
-          })} */}
 
           {alerts.map((item, index) => (
              <Marker key={index} position={{ lng: item.lng, lat: item.lat }} icon={red}

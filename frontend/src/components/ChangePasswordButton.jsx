@@ -8,7 +8,7 @@ function getBackendUrl() {
         return 'http://127.0.0.1:8080';
     } else {
         // 电脑的局域网 IP 地址
-        return 'http://10.181.218.164:8080';
+        return 'http://10.192.202.31:8080';
     }
 }
 
@@ -47,8 +47,8 @@ const ChangePasswordButton = () => {
                   if (response.data === 1) {
                     alert("密码修改成功!");
                     // 更新密码相关逻辑
-                  } else {
-                    alert("密码修改失败，请重试!");
+                  } else if (response.data === -1) {
+                    alert("新密码和旧密码相同!");
                   }
                 })
                 .catch(error => {

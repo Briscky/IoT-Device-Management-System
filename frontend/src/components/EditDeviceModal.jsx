@@ -7,7 +7,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.181.218.164:8080';
+      return 'http://10.192.202.31:8080';
   }
 }
 
@@ -104,11 +104,17 @@ const EditDeviceModal = () => {
           >
           <Select>
               <Select.Option value='1'>基础设备</Select.Option>
-              <Select.Option value='2'>可穿戴设备</Select.Option>
-              {/* 更多类型选项 */}
+              <Select.Option value='2'>车载设备</Select.Option>
+              <Select.Option value='3'>健康和医疗设备</Select.Option>
+              <Select.Option value='4'>家庭设备</Select.Option>
           </Select>
           </Form.Item>
-          <Form.Item name="description" label="设备描述">
+
+          <Form.Item
+            name="description"
+            label="设备描述"
+            rules={[{ required: true, message: '请填写设备描述!' }]}
+          >
           <Input.TextArea />
           </Form.Item>
           

@@ -7,7 +7,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.181.218.164:8080';
+      return 'http://10.192.202.31:8080';
   }
 }
 
@@ -44,8 +44,8 @@ const AddDeviceModal = () => {
       .then(response => {
         if(response.data === 1) {
           message.success('设备添加成功');
-        } else {
-          message.error('设备添加失败');
+        } else if(response.data === 0) {
+          message.error('设备名已存在');
         }
         setIsModalVisible(false);
       })
@@ -90,7 +90,8 @@ const AddDeviceModal = () => {
             <Select>
                 <Select.Option value='1'>基础设备</Select.Option>
                 <Select.Option value='2'>可穿戴设备</Select.Option>
-                {/* 更多类型选项 */}
+                <Select.Option value='3'>健康和医疗设备</Select.Option>
+                <Select.Option value='4'>家庭设备</Select.Option>
             </Select>
             </Form.Item>
             <Form.Item

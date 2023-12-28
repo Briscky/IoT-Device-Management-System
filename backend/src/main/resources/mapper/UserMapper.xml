@@ -56,4 +56,5 @@
         set `password` = '${form.newPassword}'
         where `name` = '${form.name}';
     </update>
+
 </mapper>

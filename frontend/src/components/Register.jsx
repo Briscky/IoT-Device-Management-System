@@ -10,7 +10,7 @@ function getBackendUrl() {
         return 'http://127.0.0.1:8080';
     } else {
         // 电脑的局域网 IP 地址
-        return 'http://10.181.218.164:8080';
+        return 'http://10.192.202.31:8080';
     }
 }
 
@@ -104,7 +104,8 @@ class Register extends React.Component {
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             注册
                         </Button>
-                        或者 <a onClick={this.goToLogin}>已有帐户？点此登录!</a>
+                        或者
+                        <a onClick={this.goToLogin}>已有帐户？点此登录!</a>
                     </Form.Item>
                 </Form>
             </div>

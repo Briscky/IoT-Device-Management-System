@@ -10,7 +10,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.181.218.164:8080';
+      return 'http://10.192.202.31:8080';
   }
 }
 
@@ -35,19 +35,12 @@ const Info = () => {
         setDeviceNames(formatData(response.data).deviceNames); 
         setLoading(false);
       });
-    
-    // // 获取当天设备消息数目数据
-    // axios.get(`${server}/device/query/messages/today/${username}`)
-    //   .then(response => {
-    //     setMessageCounts(response.data);
-    //     setLoading(false); // 数据加载完成后取消加载状态
-    //   });
   }, []);
 
-useEffect(() => {
-  console.log('Device Values:', deviceValues);
-  console.log('Device Names:', deviceNames);
-}, [deviceValues, deviceNames]); 
+// useEffect(() => {
+//   console.log('Device Values:', deviceValues);
+//   console.log('Device Names:', deviceNames);
+// }, [deviceValues, deviceNames]); 
 
   // 格式化数据
   function formatData(data) {

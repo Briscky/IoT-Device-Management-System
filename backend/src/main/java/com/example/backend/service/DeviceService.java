@@ -33,7 +33,7 @@ public class DeviceService {
     /**
      * 创建新的设备
      * @param form 设备所需的表单
-     * @return 1表示创建成功, 0表示创建失败
+     * @return 1表示创建成功, 0表示设备名已存在
      */
     public int addNewDevice(Map<String, Object> form) {
         if (deviceMapper.getDevice((String) form.get("name")) != null) {
@@ -56,7 +56,6 @@ public class DeviceService {
         User user = userMapper.getUserInfo(form.get("username").toString());
         form.put("userid", user.getId());
 
-
         // 检查form中是否包含type字段
         if(form.containsKey("type")) {
             // 尝试将type字段的值转换为整数
@@ -69,7 +68,7 @@ public class DeviceService {
                 // 可以选择抛出异常或返回错误代码
             }
         }
-        System.out.println(form);
+        //System.out.println(form);
         return deviceMapper.editDevice(form);
     }
 

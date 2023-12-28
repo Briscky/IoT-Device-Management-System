@@ -27,4 +27,5 @@ public interface UserMapper {
     int configEmail(@Param("form") Map<String, Object> form);
 
     int configPassword(@Param("form") Map<String, Object> form);
+
 }
