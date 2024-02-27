@@ -21,9 +21,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //@Autowired
-    //RedisUtils redisUtils;
-
     @CrossOrigin
     @RequestMapping(value = "/user/config/password", method = RequestMethod.POST)
     public int configPassword(@RequestBody Map<String, Object> form) {

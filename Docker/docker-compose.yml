@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # 将宿主机的 3000 端口映射到容器的 80 端口
+    networks:
+      - frontend-backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql 
+    networks:
+      - frontend-backend
+      - backend-mysql
+      
+  # 定义 MySQL 服务
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'Gy2574118'
+    # ports:
+    #   - "3306:3306"
+    volumes:
+      - ./mysql-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend-mysql
+      - subscriber-mysql
+
+  # 定义 Mosquitto MQTT 代理服务
+  mosquitto:
+    image: eclipse-mosquitto
+    # ports:
+    #   - "1884:1883"
+    volumes:
+      - ./mosquitto-config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - mosquitto-iotclient
+      - mosquitto-subscriber
+
+  iotclient:
+    build:
+      context: ./iotclient
+      dockerfile: Dockerfile
+    depends_on:
+      - mosquitto
+    networks:
+      - mosquitto-iotclient
+
+  subscriber:
+    build:
+      context: ./mqtt
+      dockerfile: Dockerfile
+    depends_on:
+      - mosquitto
+      - mysql
+    networks:
+      - mosquitto-subscriber
+      - subscriber-mysql
+
+volumes:
+  mysql-data:
+  mosquitto-data:
+  mosquitto-log:
+  mosquitto-conf:
+
+networks:
+  frontend-backend:
+    driver: bridge
+  backend-mysql:
+    driver: bridge
+  mosquitto-iotclient:
+    driver: bridge
+  mosquitto-subscriber:
+    driver: bridge
+  subscriber-mysql:
+    driver: bridge
+

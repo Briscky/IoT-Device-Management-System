@@ -5,15 +5,15 @@
 }
 .page-header {
     background-color: #f0f2f5; /* 背景颜色 */
-    padding: 20px; /* 内边距 */
+    padding: 10px; /* 内边距 */
     text-align: center; /* 文字居中 */
     border-bottom: 1px solid #eaeaea; /* 底部边框线 */
 }
   
 .page-header h1 {
-  margin: 0 0 10px 0; /* 标题的外边距 */
+  margin: 0 0 8px 0; /* 标题的外边距 */
   color: #333; /* 标题颜色 */
-  font-size: 26px; /* 标题字体大小 */
+  font-size: 20px; /* 标题字体大小 */
 }
 
 .page-header p {

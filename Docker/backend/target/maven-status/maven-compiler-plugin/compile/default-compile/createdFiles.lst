@@ -1,0 +1,14 @@
+com\example\backend\controller\MessageController.class
+com\example\backend\controller\UserController.class
+com\example\backend\model\Device.class
+com\example\backend\BackendApplication.class
+com\example\backend\config\WebConfig.class
+com\example\backend\model\User.class
+com\example\backend\mapper\MessageMapper.class
+com\example\backend\model\Message.class
+com\example\backend\mapper\UserMapper.class
+com\example\backend\service\DeviceService.class
+com\example\backend\mapper\DeviceMapper.class
+com\example\backend\service\MessageService.class
+com\example\backend\controller\DeviceController.class
+com\example\backend\service\UserService.class

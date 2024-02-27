@@ -5,12 +5,10 @@ import com.example.backend.mapper.DeviceMapper;
 import com.example.backend.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 @Service
 public class DeviceService {

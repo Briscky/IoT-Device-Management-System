@@ -82,7 +82,7 @@ public class UserService {
     /**
      * 用户修改密码时候的api
      * @param form 修改密码时提交的表单，用map形式存储json数据
-     * @return 1表示修改成功，否则表示修改失败
+     * @return 1表示修改成功，-1表示新旧密码相同
      */
     public int configPassword(Map<String, Object> form) {
         if(Objects.equals(userMapper.checkName(form.get("name").toString()).getPassword(), form.get("newPassword").toString()))

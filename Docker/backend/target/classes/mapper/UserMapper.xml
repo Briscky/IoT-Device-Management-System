@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.backend.model.User">
+        <result column="id" javaType="int" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+    </resultMap>
+
+    <select id="checkName" resultType="com.example.backend.model.User">
+        select *
+        from `user`
+        where `name` = #{name};
+    </select>
+
+    <select id="checkEmail" resultType="com.example.backend.model.User">
+        select *
+        from `user`
+        where `email` = #{email};
+    </select>
+
+    <insert id="registerUser" parameterType="map">
+        insert into `user`
+        values(null, '${form.name}', '${form.password}', '${form.email}');
+    </insert>
+
+    <select id="name_passwordCheck" parameterType="map" resultType="com.example.backend.model.User">
+        select *
+        from `user`
+        where `name` = '${form.name}' and `password` = '${form.password}';
+    </select>
+
+    <select id="email_passwordCheck" parameterType="map" resultType="com.example.backend.model.User">
+        select *
+        from `user`
+        where `email` = '${form.email}' and `password` = '${form.password}';
+    </select>
+
+    <select id="getUserInfo" resultType="com.example.backend.model.User">
+        select *
+        from `user`
+        where `name` = #{name};
+    </select>
+
+    <update id="configEmail" parameterType="map">
+        update `user`
+        set `email` = '${form.email}'
+        where `name` = '${form.name}';
+    </update>
+
+    <update id="configPassword" parameterType="map">
+        update `user`
+        set `password` = '${form.newPassword}'
+        where `name` = '${form.name}';
+    </update>
+</mapper>

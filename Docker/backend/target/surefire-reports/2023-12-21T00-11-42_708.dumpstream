@@ -1,0 +1,5 @@
+# Created at 2023-12-21T00:11:42.989
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Briscky03\IoT-Device-Management-System\backend\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

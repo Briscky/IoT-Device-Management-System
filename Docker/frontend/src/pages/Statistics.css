@@ -1,0 +1,15 @@
+.chart-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center; /* 添加这行 */
+}
+
+.pie-container {
+  padding: 20px;
+  margin-bottom: 30px; /* 添加底部边距来向上推动图表 */
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

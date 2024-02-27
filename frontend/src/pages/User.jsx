@@ -23,7 +23,7 @@ function getBackendUrl() {
       return 'http://127.0.0.1:8080';
   } else {
       // 电脑的局域网 IP 地址
-      return 'http://10.192.202.31:8080';
+      return 'http://10.181.213.96:8080';
   }
 }
 

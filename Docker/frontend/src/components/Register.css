@@ -1,0 +1,36 @@
+.container {
+    display: flex;            /* 开启Flexbox布局 */
+    justify-content: center;  /* 水平居中 */
+    align-items: center;      /* 垂直居中 */
+    height: 100vh;            /* 高度设置为视口高度 */
+    width: 100vw;             /* 宽度设置为视口宽度 */
+}
+
+
+.register-form {
+    padding: 20px;
+    width: 500px;
+    margin: 0;
+    background-color: #fff;
+    opacity:100%;
+    border: 3px solid #fff;
+    box-shadow: #fff;
+}
+
+/*.login-form-forgot {
+    float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+    float: right;
+}*/
+
+.login-form-button {
+    max-width: 100px;
+    width: 100%;
+    margin: 20px;
+}
+
+/*.input-box {
+    max-width: 250px;
+}*/
